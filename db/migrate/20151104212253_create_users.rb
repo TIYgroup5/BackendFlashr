@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :username, null: false
       t.string, :full_name, null: false
       t.string :email, null: false
-      t.string :password, null: false
+      t.string :password_digest
       t.string :auth_token
 
       t.timestamps null: false
