@@ -26,6 +26,28 @@ Rails.application.routes.draw do
   #     end
   #   end
 
+### Registration Routes
+
+post "signup", to: "registrations#create" as:
+delete "signup", to: "registrations#destroy", as:
+
+post "login", to: "registrations#login", as:
+
+### Deck Routes
+
+get "decks", to: "decks#index", as:
+post "decks", to: "decks#create", as:
+get "decks/:id", to: "decks#show", as:
+put "/decks/:id", to: "decks#update", as:
+delete "/decks/:id", to: "decks#destroy", as:
+
+### Card Routes
+
+get "decks/:id/cards", to: "cards#index", as:
+post "decks/:id/cards", to: "cards#create", as:
+put "decks/:id/cards/:id", to: "cards#update", as:
+delete "decks/:id/cards/:id", to: "cards#destroy", as:
+
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
