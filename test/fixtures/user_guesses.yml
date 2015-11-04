@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  duration: 2015-11-04 16:29:19
+  correct: false
+  user_id: 1
+  card_id: 1
+
+two:
+  duration: 2015-11-04 16:29:19
+  correct: false
+  user_id: 1
+  card_id: 1
