@@ -11,7 +11,7 @@ class DeckController < ApplicationController
     if @deck.save
       render "create.json.jbuilder", status: :ok
     else
-      render json: {@deck.errors},
+      render json: { error: "Could not create deck"},
         status: :unprocessable_entity
     end
   end
@@ -19,13 +19,15 @@ class DeckController < ApplicationController
 
   def update
     @deck = Deck.find(params[:id])
-    if @deck.update(deck: params[:deck]
-                    title: params [:title])
+    if @deck.update(deck: params[:deck],
+                    title: params[:title]
+                    )
+
       render "create.json.jbuilder",
         status: :ok
 
     else
-      render json: {@deck.errors},
+      render json:{error: "Could not update"},
         status: :unprocessable_entity
     end
   end
