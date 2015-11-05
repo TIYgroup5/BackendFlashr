@@ -18,6 +18,9 @@ def create
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       @user.destroy
+      render plain: "The user has been deleted successfully."
+        status: :accepted
+        # status: 202
     else
       render json: { error: "Invalid email (#{params[:email]}) or password." },
         status: :unauthorized
@@ -31,7 +34,7 @@ def create
       render "login.json.jbuilder", status: :ok
       # status 200
     else
-      render json: { error: "Could not find user for #{params[:username]} or wrong password." },
+      render json: { error: "Either could not find user for #{params[:username]} or the password was incorrect." },
         status: :unauthorized
         # status: 401
     end
