@@ -9,9 +9,10 @@ class DeckController < ApplicationController
   def create
     @deck = Deck.new(params[:deck])
     if @deck.save
-     render "create.json.jbuilder", status: :ok
+      render "create.json.jbuilder", status: :ok
     else
-      render json: @deck.errors, status: :unprocessable_entity }
+      render json: {@deck.errors},
+        status: :unprocessable_entity
     end
   end
 
@@ -19,11 +20,13 @@ class DeckController < ApplicationController
   def update
     @deck = Deck.find(params[:id])
     if @deck.update(deck: params[:deck]
-    	            title: params [:title])
-    render "create.json.jbuilder", status: :ok
+                    title: params [:title])
+      render "create.json.jbuilder",
+        status: :ok
 
     else
-      render json: @deck.errors, status: :unprocessable_entity }
+      render json: {@deck.errors},
+        status: :unprocessable_entity
     end
   end
 
@@ -34,7 +37,6 @@ class DeckController < ApplicationController
     else
 
       render json: { error: "Invalid (#{params[:user]})" },
-
         status: :unauthorized
     end
   end
