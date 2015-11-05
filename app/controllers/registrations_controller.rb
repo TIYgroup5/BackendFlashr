@@ -18,7 +18,7 @@ def create
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       @user.destroy
-      render plain: "The user has been deleted successfully."
+      render plain: "The user has been deleted successfully.",
         status: :accepted
         # status: 202
     else
