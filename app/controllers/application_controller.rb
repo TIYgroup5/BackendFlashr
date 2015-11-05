@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     token = request.headers['Access-Token']
-    token && User.find_by(access_token: token)
+    token && User.find_by(auth_token: token)
   end
 
   def authenticate_user!
