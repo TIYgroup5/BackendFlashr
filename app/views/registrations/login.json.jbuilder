@@ -1,3 +1,3 @@
 json.user do
-  json.extract! @user, :email, :auth_token
+  json.extract! @user, :email, :access_token
 end
