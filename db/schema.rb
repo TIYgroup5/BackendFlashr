@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104212919) do
+ActiveRecord::Schema.define(version: 20151105183819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20151104212919) do
   end
 
   create_table "user_guesses", force: :cascade do |t|
-    t.datetime "duration",   null: false
-    t.boolean  "correct",    null: false
+    t.datetime "duration"
+    t.boolean  "correct"
     t.integer  "user_id"
     t.integer  "card_id"
     t.datetime "created_at", null: false
