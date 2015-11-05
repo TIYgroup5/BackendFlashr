@@ -45,14 +45,15 @@ delete "/decks/:id", to: "decks#destroy"
 
 get "decks/:id/cards", to: "cards#index"
 post "decks/:id/cards", to: "cards#create"
-put "decks/:id/cards/:id", to: "cards#update"
-delete "decks/:id/cards/:id", to: "cards#destroy"
+put "cards/:id", to: "cards#update"
+delete "cards/:id", to: "cards#destroy"
+get "cards/:id", to: "cards#show"
 
 ### Card Routes
 
-get "guesses/:id", to: "userguesses#show"
-post "guesses", to: "userguesses#new"
-put "guesses/:id", to: "userguesses#update"
+get "guesses/:id", to: "user_guesses#show"
+post "card/:id/guesses", to: "user_guesses#new"
+put "guesses/:id", to: "user_guesses#update"
 
   # Example resource route with sub-resources:
   #   resources :products do
