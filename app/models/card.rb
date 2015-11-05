@@ -3,5 +3,5 @@ class Card < ActiveRecord::Base
   has_many :user_guesses
   has_many :users, through: :user_guesses
 
-  validates_presesence_of :question, :answer
+  validates_presence_of :question, :answer
 end
