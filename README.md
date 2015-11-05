@@ -69,7 +69,7 @@ If the request was unsuccessful, you should receive status code 401 and ...
     "Invalid email (#{params[:email]}) or password."
   ]
 }
-```
+
 
 ### Logging In
 
