@@ -64,12 +64,13 @@ If the request was successful, you should receive status code 202 and ...
 
 If the request was unsuccessful, you should receive status code 401 and ...
 
+```
 {
   "errors": [
     "Invalid email (#{params[:email]}) or password."
   ]
 }
-
+```
 
 ### Logging In
 
