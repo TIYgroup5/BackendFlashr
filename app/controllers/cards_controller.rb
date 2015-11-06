@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   def index
-    @deck = Deck.find_by(id: params[:id])
+    @deck = Deck.find(params[:id])
     @cards = @deck.cards
     if @cards
       render "index.json.jbuilder", status: :ok
@@ -12,12 +12,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def show
+    @card = Card.find(params[:id])
+    deck = Deck.find_by(id: @card.deck_id)
+    if @card && deck.user_id == current_user.id
+      render "show.json.builder", status: :ok
+    end
+  end
+
   def create
     @deck = Deck.find(params[:id])
-    if @deck && @deck.user_id = current_user.id
+    if @deck && @deck.user_id == current_user.id
       @card = @deck.cards.create(question: params[:question],
                                  answer: params[:answer])
-      render "show.json.jbuilder", status: :created
+      render "create.json.jbuilder", status: :created
         # status 201
     else
       render json: { error: "Deck was not found. The new card was not created successfully." },
@@ -27,12 +35,12 @@ class CardsController < ApplicationController
   end
 
   def update
-    @card = Card.find_by(id: params[:id])
+    @card = Card.find(params[:id])
     deck = Deck.find_by(id: @card.deck_id)
     if @card && current_user.id == deck.user_id
       @card.update(question: params[:question],
                    answer: params[:answer])
-        render "show.json.jbuilder", status: :accepted
+        render "update.json.jbuilder", status: :accepted
           # status 202
     else
         render json: { error: "Either the card was not found or it does not belong to #{current_user.username}" },
