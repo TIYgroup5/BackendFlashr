@@ -14,8 +14,7 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
-    deck = Deck.find_by(id: @card.deck_id)
-    if @card && deck.user_id == current_user.id
+    if @card
       render "show.json.builder", status: :ok
     end
   end
