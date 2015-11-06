@@ -1,6 +1,5 @@
 class UpdateUserGuesses < ActiveRecord::Migration
   def change
-    change_column_null :user_guesses, :duration, true
-    change_column_null :user_guesses, :correct, true
+    change_column :user_guesses, :duration, :integer
   end
 end
