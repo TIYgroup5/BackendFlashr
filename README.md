@@ -152,7 +152,7 @@ If the request failed, you should receive the status code 417 and ...
 
 ```{error: "Either the deck was not found or it does not belong to #{current_user.username}"},```
 
-### Delete a Card
+### Delete a deck
 
 #### DELETE `cards/:id`
 
