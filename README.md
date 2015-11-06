@@ -67,9 +67,7 @@ If the request was unsuccessful, you should receive status code 401 and ...
 
 ```
 {
-  "errors": [
-    "Invalid email (#{params[:email]}) or password."
-  ]
+  "error": "Invalid email (#{params[:email]}) or password."
 }
 ```
 
@@ -95,12 +93,135 @@ If the request was successful, you should receive status code 201 and ...
 }
 ```
 
-If the user could not be created, you should receive status code 401 and ...
+If the user could not be found, you should receive status code 401 and ...
 
 ```
 {
-  "errors": [
-    Either could not find user for #{params[:username]} or the password was incorrect."
-  ]
+  "error": Either could not find user for #{params[:username]} or the password was incorrect."
+}
+```
+
+### Displaying an Index of Cards
+
+#### GET `decks/:id/cards`
+
+**Query Params**:
+
+`id`: the ID of the deck the card belongs to (Integer)
+
+**Response**
+
+If the request was successful, you should receive the status code 200 and for each instance of a card ...
+
+```
+{
+  "card": {
+    "id": 5
+    "question": "What color is a giraffe's tongue?",
+    "answer": "golden"
+    "deck_id": 3
+  }
+}
+```
+
+If no cards could be found, you should receive status code 404 and ...
+
+```
+{
+  "error": "There are no cards to display."
+}
+```
+
+### Creating a New Card
+
+#### POST `decks/:id/cards`
+
+**Query Params**
+
+`id`: the ID of the deck the card belongs to (Integer)
+
+**Post Params**
+
+`question`: the question to be displayed on the card
+`answer`: the correct answer to the question
+
+**Response**
+
+If the request was successful, you should receive the status code 201 and ...
+
+```
+{
+  "card": {
+    "id": 5
+    "question": "What color is a giraffe's tongue?",
+    "answer": "golden"
+    "deck_id": 3
+  }
+}
+```
+
+If the request failed, you should receive the status code 417 and ...
+
+```
+{
+  "error": "Deck was not found. The new card was not created successfully."
+}
+```
+
+### Updating an Existing Card
+
+#### PUT `cards/:id`
+
+**Query Params**
+
+`id`: the ID of the card you'd like to update
+
+**Post Params**
+
+`question`: the question to be displayed on the card
+`answer`: the correct answer to the question
+
+**Response**
+
+If the request was accepted, you should receive status code 202 and ...
+
+```
+{
+  "card": {
+    "id": 5
+    "question": "What color is a giraffe's tongue?",
+    "answer": "golden"
+    "deck_id": 3
+  }
+}
+```
+
+If the request failed, you should receive status code 417 and ...
+
+```
+{
+  "error": Either the card was not found or it does not belong to #{current_user.username}"
+}
+```
+
+### Delete a Card
+
+#### DELETE `cards/:id`
+
+**Query Params**
+
+`id`: The ID of the card you'd like to destroy
+
+**Response**
+
+If the request was accepted, you should receive status code 202 and ...
+
+``The card has been deleted successfully.``
+
+If the request failed, you should receive status code 401 and ... 
+
+```
+{
+  "error": "The card you requested does not exist, or #{current_user.username} isn't authorized to delete it."
 }
 ```
