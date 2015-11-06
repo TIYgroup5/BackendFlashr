@@ -16,7 +16,7 @@ class CardsController < ApplicationController
     @deck = Deck.find(params[:id])
     if @deck && @deck.user_id = current_user.id
       @card = @deck.cards.create(question: params[:question],
-                               answer: params[:answer])
+                                 answer: params[:answer])
       render "show.json.jbuilder", status: :created
         # status 201
     else
@@ -43,7 +43,7 @@ class CardsController < ApplicationController
 
   def destroy
     @card = Card.find_by(id: params[:id])
-    deck = current_user.decks.first
+    deck = current_user.decks .first
     if @card && @card.deck_id == deck.id
     # @deck = Deck.find(params[:id])
     # if @deck && current_user.id == @deck.user_id
