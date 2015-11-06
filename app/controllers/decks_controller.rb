@@ -1,13 +1,15 @@
-class DeckController < ApplicationController
+class DecksController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @decks = Deck.all
+    # binding.pry
     render "index.json.jbuilder", status: :ok
     # status 200
   end
 
   def create
-    @deck = Deck.new(params[:deck])
+    @deck = Deck.new(title: params[:title], user_id: current_user.id)
     if @deck.save
       render "create.json.jbuilder", status: :ok
     else
@@ -19,8 +21,7 @@ class DeckController < ApplicationController
 
   def update
     @deck = Deck.find(params[:id])
-    if @deck.update(deck: params[:deck],
-                    title: params[:title]
+    if @deck.update(title: params[:title]
                     )
 
       render "create.json.jbuilder",
@@ -34,11 +35,12 @@ class DeckController < ApplicationController
 
   def destroy
     @deck = Deck.find(params[:id])
-    if current_user.id == deck.user_id
+    if @deck && current_user.id == @deck.user_id
       @deck.destroy
+      render json: { reponse: "Has been deleted"}
     else
 
-      render json: { error: "Invalid (#{params[:user]})" },
+      render json: { error: "Can not destroy" },
         status: :unauthorized
     end
   end
