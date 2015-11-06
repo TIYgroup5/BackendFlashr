@@ -28,8 +28,8 @@ class CardsController < ApplicationController
 
   def update
     @card = Card.find_by(id: params[:id])
-    deck = current_user.decks.first
-    if @card && @card.deck_id == deck.id
+    deck = Deck.find_by(id: @card.deck_id)
+    if @card && current_user.id == deck.user_id
       @card.update(question: params[:question],
                    answer: params[:answer])
         render "show.json.jbuilder", status: :accepted
@@ -43,12 +43,8 @@ class CardsController < ApplicationController
 
   def destroy
     @card = Card.find_by(id: params[:id])
-    deck = current_user.decks .first
-    if @card && @card.deck_id == deck.id
-    # @deck = Deck.find(params[:id])
-    # if @deck && current_user.id == @deck.user_id
-    #   @card = @deck.cards.find_by(id: params[:id])
-    #   if @card
+    deck = Deck.find_by(id: @card.deck_id)
+    if @card && current_user.id == deck.user_id
       @card.destroy
       render plain: "The card has been deleted successfully.",
         status: :accepted
