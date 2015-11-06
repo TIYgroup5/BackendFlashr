@@ -13,7 +13,7 @@ class DecksController < ApplicationController
     if @deck.save
       render "create.json.jbuilder", status: :ok
     else
-      render json: { error: "Could not create deck"},
+      render json: { error: "Deck was not found. The new deck was not created successfully."},
         status: :unprocessable_entity
     end
   end
@@ -28,7 +28,7 @@ class DecksController < ApplicationController
         status: :ok
 
     else
-      render json:{error: "Could not update"},
+      render json:{error: "Either the deck was not found or it does not belong to #{current_user.username}"},
         status: :unprocessable_entity
     end
   end
@@ -37,10 +37,10 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
     if @deck && current_user.id == @deck.user_id
       @deck.destroy
-      render json: { reponse: "Has been deleted"}
+      render json: { reponse: "The deck has been deleted successfully."}
     else
 
-      render json: { error: "Can not destroy" },
+      render json: { error: "The deck you requested does not exist, or you aren't authorized to delete it." },
         status: :unauthorized
     end
   end
