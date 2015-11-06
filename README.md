@@ -101,6 +101,80 @@ If the user could not be found, you should receive status code 401 and ...
 }
 ```
 
+### Displaying an Index of Decks
+
+#### Get `decks
+
+**Response**
+
+If the request was successful, you should receive the status code 200 for all the decks.
+
+```
+{"decks":[{"title":"#@%*","id":1},{"title":"#@%*","id":2},{"title":"#@%*","id":3},{"title":"#@%*","id":4},{"title":"#@%*","id":5},{"title":"#@%*","id":6},{"title":"#@%*","id":7},{"title":"#@%*","id":8},{"title":"cricket","id":9},{"title":"new","id":10},{"title":"new","id":11},{"title":"new","id":14},{"title":"I_am_fastest_man_alive","id":15},{"title":"Fastest Man Alive","id":16}]}
+
+```
+
+
+### Creating a New Deck
+
+#### POST `decks
+
+If the request was successful, you should receive the status code 200 and for each instance of the deck ...
+
+````
+{
+  "deck": {
+    "title": "Fastest Man Alive",
+    "id": 16
+  }
+}
+```
+If the request failed, you should receive the status code 417 and ...
+
+{"error":"Deck was not found. The new deck was not created successfully."}
+
+### Updating an Existing Deck
+
+#### PUT `/decks/:id`
+
+**Query Params**:
+
+`id`: the ID of the deck belongs to (Integer)
+
+**Response**
+
+If the request was successful, you should receive the status code 200 and for each instance of the deck ...
+
+```{"deck":{
+      "title":" I Am The Fastest Man Alive","id":16}}```
+
+If the request failed, you should receive the status code 417 and ...
+
+```{error: "Either the deck was not found or it does not belong to #{current_user.username}"},```
+
+### Delete a Card
+
+#### DELETE `cards/:id`
+
+**Query Params**
+
+`id`: The ID of the Deck you'd like to destroy
+
+**Response**
+
+If the request was accepted, you should receive status code 202 and ...
+
+```{ reponse: "The card has been deleted successfully."}```
+
+If the request failed, you should receive status code 401 and ... 
+
+```
+{
+  "error": "The deck you requested does not exist, or #{current_user.username} isn't authorized to delete it."
+}
+```
+
+
 ### Displaying an Index of Cards
 
 #### GET `decks/:id/cards`
@@ -159,9 +233,7 @@ If the request was successful, you should receive the status code 201 and ...
   }
 }
 ```
-
-If the request failed, you should receive the status code 417 and ...
-
+If the request failed, you should receive status code 417 and ...
 ```
 {
   "error": "Deck was not found. The new card was not created successfully."
