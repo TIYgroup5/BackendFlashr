@@ -43,10 +43,10 @@ delete "/decks/:id", to: "decks#destroy"
 ### Card Routes
 
 get "decks/:id/cards", to: "cards#index"
+get "cards/:id", to: "cards#show"
 post "decks/:id/cards", to: "cards#create"
 put "cards/:id", to: "cards#update"
 delete "cards/:id", to: "cards#destroy"
-#get "cards/:id", to: "cards#show"
 
 ### Guess Routes
 
