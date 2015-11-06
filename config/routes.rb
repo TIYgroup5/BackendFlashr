@@ -37,7 +37,6 @@ post "login", to: "registrations#login"
 
 get "decks", to: "decks#index"
 post "decks", to: "decks#create"
-get "decks/:id", to: "decks#show"
 put "/decks/:id", to: "decks#update"
 delete "/decks/:id", to: "decks#destroy"
 
@@ -49,11 +48,10 @@ put "cards/:id", to: "cards#update"
 delete "cards/:id", to: "cards#destroy"
 #get "cards/:id", to: "cards#show"
 
-### Card Routes
+### Guess Routes
 
 get "guesses/:id", to: "user_guesses#show"
 post "cards/:id/guesses", to: "user_guesses#new"
-put "guesses/:id", to: "user_guesses#update"
 
   # Example resource route with sub-resources:
   #   resources :products do
