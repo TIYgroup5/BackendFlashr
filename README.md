@@ -236,6 +236,35 @@ If no cards could be found, you should receive status code 404 and ...
   "error": "There are no cards to display."
 }
 ```
+### Displaying a Single Card
+
+#### GET `cards/:id`
+
+**Query Params:**
+
+`id`: the card's ID (Integer)
+
+**Response**
+
+If the request was successful, you should receive the status code 202 and ...
+
+{
+  "card": {
+    "id": 4
+    "question": "What color is a giraffe's tongue?",
+    "answer": "black"
+    "deck_id": 3
+  }
+}
+```
+
+If the request failed, you should receive status code 404 and ...
+
+```
+{
+  "error": "Card was not found."
+}
+```
 
 ### Creating a New Card
 
